@@ -1,38 +1,93 @@
-<h1>EAT-DA-BURGER!</h1>
 
-{{!-- <h2>Cats that are not sleepy!</h2> --}}
-
-<ul>
-  {{#each cats}}
-    {{#unless sleepy}}
-      {{> cats/cat-block sleep=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
-
-<h2>Cats that are sleepy!</h2>
-
-<ul>
-  {{#each cats}}
-    {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a Cat</h2>
-<form class="create-form">
-
-  <div class="form-group">
-    <label for="ca">Cat Name:</label>
-    <input type="text" id="ca" name="name">
+{{!-- <div class="container">
+  <div class="row">
+    <div class="col-sm-12 text center" id="title">
+      <div class="jumbotron">
+        <div class="text">
+          <h1>EAT-DA-BURGER!</h1>
+        </div>
+      </div>
+    </div>    
   </div>
 
-  <div class="form-group">
-    <label for="sleepy">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
+  <div class="row">
+    <div class="col-sm-6 text center" id="title">
+      <div class="jumbotron">
+        <div class="">
+          <h1>EAT-DA-BURGER!</h1>
+        </div>
+      </div>
+    </div>    
   </div>
 
-  <button type="submit">Add Cat</button>
-</form>
+
+
+
+
+</div>  
+     --}}
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 text-center" id="top-bar">
+            <div class="jumbotron">
+                <div class="container text-center">
+                    <h1>Eat-Da-Burgers!</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container col-xs-6 text-center">
+                <h3>Available Burgers</h3>
+            </div>
+            <div class="container col-xs-6 text-center">
+                <h3>Devoured Burgers</h3>
+            </div>
+        </div>
+        <br>
+        <div class="col-xs-6 text-center" class="task">
+            <div class="row">
+                {{#each burger_data}}
+                {{#unless this.devoured}}
+                <div class="col-xs-9 text-center">
+                    <pre>{{this.id}}.{{this.burger_name}}
+                    </pre>
+                </div>
+                <div class="col-xs-3 text-center">
+                    <form class="devour-form button-size">
+                        <input input type="hidden" class="burger_id" type="text" value={{this.id}}><br>
+                        <button type="submit" class="btn btn-primary">Eat it!</button>
+                    </form>
+                </div>
+                {{/unless}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="col-xs-6 text-center" class="task">
+            {{#each burger_data}}
+            {{#if this.devoured}}
+            <input class="form-control" type="text" placeholder="{{this.id}}.{{this.burger_name}}" readonly>
+            {{/if}}
+            {{/each}}
+        </div>
+    </div>
+    <br>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 text-center enter_section">
+            <form action="/burgers/create" method="POST">
+                <input type="text" class="form-control" name="burger_name" value="" id="enter_text">
+                <br>
+                <button type="submit" class="btn btn-info" id="text-enter-btn">Submit</button>
+            </form>
+            <br>
+            <p>Enter the name of a burger and click Submit to see it appear in Available Burgers.</p>
+        </div>
+    </div>
+</div>
+
